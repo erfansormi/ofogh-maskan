@@ -1,3 +1,11 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "erfansormi97@gmail.com",
+      "password": "$2a$10$aY6TzeyMckV87WoHJBOShueyBT0zXofoDeiAgiv0e1BFR6o8/tlRe",
+      "firstname": "عرفان",
+      "lastname": "سرمی",
+      "id": 1
+    }
+  ]
 }
