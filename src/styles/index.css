@@ -27,9 +27,17 @@
   h6 {
     @apply text-lg;
   }
+
+  a {
+    @apply text-cyan-500;
+  }
 }
 
 @layer utilities {
+  .container {
+    @apply mx-auto;
+  }
+
   .center {
     @apply flex items-center justify-center;
   }

@@ -38,7 +38,7 @@ const Input = forwardRef<HTMLInputElement, InputProps & OtherProps>(
 
         <div className="gap-1 flex-col flex">
           <input className={cn(inputStyles({ className, variant }))} ref={ref} {...props} />
-          <p className="h-4 text-xs text-red-500">{error}</p>
+          <p className="h-4 indent-1 text-xs text-red-500">{error}</p>
         </div>
       </div>
     );

@@ -87,9 +87,7 @@ const SignupPage = () => {
           />
           <div className="text-sm flex items-center gap-2">
             <span className="text-slate-500">حساب دارید؟</span>
-            <Link className="text-blue-500" to={"/auth/login"}>
-              صفحه ورود
-            </Link>
+            <Link to={"/auth/login"}>صفحه ورود</Link>
           </div>
         </div>
         <div className="self-end">
