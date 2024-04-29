@@ -1,19 +1,42 @@
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../../lib/axios";
 import Input from "../../../components/ui/input";
 import Button from "../../../components/ui/button";
-import { useForm } from "react-hook-form";
-import { SignupDataType, signupSchema } from "../../../utils/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSubmitData } from "../../../hooks/use-submit-data";
+import { useDataStates } from "../../../hooks/use-data-states";
+import { SignupDataType, signupSchema } from "../../../utils/schemas/auth";
+
+interface SignupResponse {
+  accessToken: string;
+}
 
 const SignupPage = () => {
-  const { submit, data, error, loading } = useSubmitData<SignupDataType>("/users");
+  const { loading, setLoading } = useDataStates();
+  const navigate = useNavigate();
+
   const { handleSubmit, formState, register } = useForm<SignupDataType>({
     resolver: zodResolver(signupSchema),
   });
 
   const ouSubmit = (data: SignupDataType) => {
-    submit(data);
-    console.log(data);
+    setLoading(true);
+
+    setTimeout(() => {
+      axiosInstance
+        .post<SignupResponse>("/register", { ...data, confirmPassword: undefined })
+        .then((res) => {
+          localStorage.setItem("token", res.data.accessToken);
+          toast.success("ثبت نام با موفقیت انجام شد");
+          navigate("/");
+        })
+        .catch((err: AxiosError<string>) => {
+          toast.error(err.response?.data || err.message);
+        })
+        .finally(() => setLoading(false));
+    }, 1000);
   };
 
   return (
@@ -62,6 +85,12 @@ const SignupPage = () => {
             label="تکرار رمز عبور"
             error={formState.errors.confirmPassword?.message}
           />
+          <div className="text-sm flex items-center gap-2">
+            <span className="text-slate-500">حساب دارید؟</span>
+            <Link className="text-blue-500" to={"/auth/login"}>
+              صفحه ورود
+            </Link>
+          </div>
         </div>
         <div className="self-end">
           <Button

@@ -3,14 +3,40 @@ import Button from "../../../components/ui/button";
 import { useForm } from "react-hook-form";
 import { LoginDataType, loginSchema } from "../../../utils/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useDataStates } from "../../../hooks/use-data-states";
+import axiosInstance from "../../../lib/axios";
+import { AxiosError } from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
+interface LoginResponse {
+  accessToken: string;
+}
 
 const LoginPage = () => {
+  const { loading, setLoading } = useDataStates();
+  const navigate = useNavigate();
+
   const { handleSubmit, formState, register } = useForm<LoginDataType>({
     resolver: zodResolver(loginSchema),
   });
 
-  const ouSubmit = async (data: LoginDataType) => {
-    console.log(data);
+  const ouSubmit = (data: LoginDataType) => {
+    setLoading(true);
+
+    setTimeout(() => {
+      axiosInstance
+        .post<LoginResponse>("/login", data)
+        .then((res) => {
+          localStorage.setItem("token", res.data.accessToken);
+          toast.success("ورود با موفقیت انجام شد");
+          navigate("/");
+        })
+        .catch((err: AxiosError<string>) => {
+          toast.error(err.response?.data || err.message);
+        })
+        .finally(() => setLoading(false));
+    }, 1000);
   };
 
   return (
@@ -36,11 +62,18 @@ const LoginPage = () => {
             label="رمز عبور"
             error={formState.errors.password?.message}
           />
+          <div className="text-sm flex items-center gap-2">
+            <span className="text-slate-500">حساب ندارید؟</span>
+            <Link className="text-blue-500" to={"/auth/signup"}>
+              صفحه ثبت نام
+            </Link>
+          </div>
         </div>
         <div className="self-end">
           <Button
             width={"lg"}
             type="submit"
+            loading={loading}
             disabled={formState.submitCount > 0 && !formState.isSubmitSuccessful}
           >
             ورود

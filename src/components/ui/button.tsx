@@ -1,6 +1,7 @@
 import { VariantProps, cva } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "../../lib/utils";
+import { LoaderCircle } from "lucide-react";
 
 type ButtonProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -41,7 +42,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps & OtherProps>(
         disabled={disabled}
         className={cn(disabled && "opacity-65", buttonStyles({ className, variant, width }))}
       >
-        {loading ? <span>loading...</span> : props.children}
+        {loading ? (
+          <span className="animate-spin center">
+            <LoaderCircle />
+          </span>
+        ) : (
+          props.children
+        )}
       </button>
     );
   }
