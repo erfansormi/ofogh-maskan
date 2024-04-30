@@ -3,4 +3,6 @@ export const errorMessages = Object.freeze({
   invalidFormat: (name: string) => `فرمت ${name} وارد شده صحیح نمی‌باشد`,
   minLength: (name: string, min: number) => `${name} نمی‌تواند کمتر از ${min} کاراکتر داشته باشد`,
   maxLength: (name: string, max: number) => `${name} نمی‌تواند بیشتر از ${max} کاراکتر داشته باشد`,
+  min: (name: string, min: number) => `${name} نمی‌تواند کمتر از ${min} باشد`,
+  max: (name: string, max: number) => `${name} نمی‌تواند بیشتر از ${max} باشد`,
 });
