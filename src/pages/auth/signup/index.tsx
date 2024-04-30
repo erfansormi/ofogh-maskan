@@ -36,7 +36,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-400/90 center">
+    <div className="min-h-screen px-4 bg-gradient-to-br from-slate-50 to-slate-400/90 center">
       <form
         onSubmit={handleSubmit(ouSubmit)}
         className="max-w-2xl w-full bg-white px-8 py-8 rounded-lg shadow flex flex-col gap-6 center"
@@ -47,7 +47,7 @@ const SignupPage = () => {
           </h1>
         </div>
         <div className="flex flex-col gap-3 w-full">
-          <div className="flex items-center w-full gap-3">
+          <div className="flex items-center md:flex-row flex-col w-full gap-3">
             <Input
               variant={"filled"}
               {...register("firstname")}

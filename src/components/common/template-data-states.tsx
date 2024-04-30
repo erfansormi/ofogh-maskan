@@ -20,7 +20,12 @@ const TemplateDataStates = (props: Props) => {
   const { loadingItemsCount = 10, isDataEmpty = false, isError = false, isLoading = false } = props;
 
   return (
-    <div className={cn("grid-cols-5 grid gap-5 w-full", props.classNames?.root)}>
+    <div
+      className={cn(
+        "lg:grid-cols-4 grid-cols-2 xl:grid-cols-5 grid gap-5 w-full",
+        props.classNames?.root
+      )}
+    >
       {
         // LOADING
         isLoading ? (

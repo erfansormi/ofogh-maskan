@@ -8,7 +8,7 @@ const Header = () => {
   const { user } = useUserContext();
 
   return (
-    <header className="h-14 flex items-center px-6 shadow backdrop-blur-[6px] bg-slate-100/50 dark:bg-slate-900 w-full z-50 top-0 inset-x-0 sticky">
+    <header className="h-14 flex items-center px-6 shadow backdrop-blur-[6px] bg-slate-100/50 dark:bg-slate-900 w-full z-20 top-0 inset-x-0 sticky">
       <nav className="flex size-full items-center justify-between container">
         <div className="">
           <h2 className="text-3xl">

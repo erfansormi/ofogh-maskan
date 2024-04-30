@@ -13,12 +13,14 @@ interface OtherProps extends VariantProps<typeof buttonStyles> {
 }
 
 const buttonStyles = cva(
-  "px-4 py-2 rounded-lg border-main duration-300 transition-colors outline-0 focus:ring-1 focus:ring-blue-600",
+  "px-4 py-2 h-10 rounded-lg border-main duration-300 text-sm font-medium transition-colors outline-0",
   {
     variants: {
       variant: {
         default: "bg-blue-500 text-white hover:bg-blue-600",
-        outline: "bg-white border text-slate-500 border-slate-400",
+        outline: "bg-white border text-slate-500 border-slate-400 hover:bg-slate-50",
+        success: "bg-emerald-100 text-emerald-700 border-emerald-500 border hover:bg-emerald-200",
+        error: "bg-red-100 text-red-700 border-red-500 border hover:bg-red-200",
       },
       width: {
         default: "",

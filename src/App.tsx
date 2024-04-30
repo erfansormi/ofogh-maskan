@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     path: "/register-ad",
     element: (
       <ProtectedRoute>
-        <RegisterAdPage />
+        <RegisterAdPage type="create" />
       </ProtectedRoute>
     ),
   },

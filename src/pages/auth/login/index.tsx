@@ -35,7 +35,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-400/90 center">
+    <div className="min-h-screen px-4 bg-gradient-to-br from-slate-50 to-slate-400/90 center">
       <form
         onSubmit={handleSubmit(ouSubmit)}
         className="max-w-2xl w-full bg-white px-8 py-8 rounded-lg shadow flex flex-col gap-6 center"
