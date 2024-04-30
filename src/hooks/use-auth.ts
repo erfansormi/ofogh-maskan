@@ -1,12 +1,14 @@
-import { User } from "../types/user";
 import { jwtDecode } from "jwt-decode";
-import axiosInstance from "../lib/axios";
-import { useEffect } from "react";
 import { useUserContext } from "../context/user-context";
+import { AuthServiceAPI } from "../services/auth";
+import { useEffect } from "react";
 
 export const useAuth = () => {
-  const { setUser, user } = useUserContext();
-  const removeToken = () => localStorage.removeItem("token");
+  const { setUser, setLoading } = useUserContext();
+  const removeToken = () => {
+    setLoading(false);
+    localStorage.removeItem("token");
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,16 +33,15 @@ export const useAuth = () => {
       return;
     }
 
-    axiosInstance
-      .get<User>(`/660/users/${decodedData.sub}`)
+    setLoading(true);
+    AuthServiceAPI.getUserData(decodedData.sub)
       .then((res) => {
         setUser(res.data);
       })
       .catch(() => {
         setUser(null);
         removeToken();
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
-
-  return user;
 };

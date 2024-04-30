@@ -1,20 +1,18 @@
+import axiosInstance from "../lib/axios";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../utils/urls";
+import { useDataStates } from "./use-data-states";
 
 export const useFetch = <T>(endpoint: string) => {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, loading, setData, setError, setLoading } = useDataStates<T>();
 
   useEffect(() => {
+    setLoading(true);
+
     setTimeout(() => {
-      fetch(`${BASE_URL}${endpoint}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data);
+      axiosInstance
+        .get(endpoint)
+        .then((res) => {
+          setData(res.data);
           setError(null);
         })
         .catch((err) => {
