@@ -12,9 +12,11 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { useDataStates } from "../../hooks/use-data-states";
+import { useUserContext } from "../../context/user-context";
 
 const RegisterAdPage = () => {
   const navigate = useNavigate();
+  const { user } = useUserContext();
   const { loading, setLoading } = useDataStates();
 
   const { formState, clearErrors, handleSubmit, register, setValue, watch } =
@@ -27,7 +29,7 @@ const RegisterAdPage = () => {
     const body = { ...data, lat: undefined, lng: undefined };
 
     setTimeout(() => {
-      AdsServicesAPI.create({ ...body, location: [data.lat, data.lng] })
+      AdsServicesAPI.create({ ...body, location: [data.lat, data.lng], userId: user?.id || 1 })
         .then(() => {
           toast.success("آگهی با موفقیت ثبت شد");
           navigate("/");

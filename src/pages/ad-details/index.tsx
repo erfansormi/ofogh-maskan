@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../hooks/use-fetch";
 import { AdsDataType } from "../../utils/schemas/ads";
@@ -7,13 +6,12 @@ import TemplateDataStates from "../../components/common/template-data-states";
 import Map from "../../components/common/map";
 import { numberSeparator } from "../../utils/numbers";
 import LinerAdDetail from "./components/liner-ad-detail";
-import { Copy } from "lucide-react";
 import CopyIcon from "../../components/ui/copy-icon";
+import { timeAgo } from "../../utils/time";
 
 const AdDetails = () => {
   const params = useParams();
   const { data, error, loading } = useFetch<AdsDataType>(`/ads/${params.id}`);
-  console.log(data?.description);
 
   return (
     <Layout>
@@ -29,7 +27,12 @@ const AdDetails = () => {
         <div className="max-w-4xl flex gap-8 col-span-full w-full">
           {/* DETAILS */}
           <div className="basis-1/2 flex flex-col gap-4">
-            <h1 className="text-3xl">{data?.title}</h1>
+            <div>
+              <h1 className="text-3xl">{data?.title}</h1>
+              <p className="mt-2 text-sm text-slate-500">
+                {data?.createdAt && timeAgo(data.createdAt)}
+              </p>
+            </div>
             <hr />
 
             <LinerAdDetail title="متراژ" value={data?.meterage} />

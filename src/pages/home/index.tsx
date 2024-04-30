@@ -6,6 +6,7 @@ import { AdsDataType } from "../../utils/schemas/ads";
 import BrandTitle from "../../components/common/brand-title";
 import TemplateDataStates from "../../components/common/template-data-states";
 import { Link } from "react-router-dom";
+import { timeAgo } from "../../utils/time";
 
 const HomePage = () => {
   const { data, error, loading } = useFetch<AdsDataType[]>("/ads");
@@ -38,6 +39,9 @@ const HomePage = () => {
                     <span className="mb-1 block font-medium">{item.province}</span>
                     <p className="text-sm line-clamp-2 text-slate-500">{item.address}</p>
                   </div>
+                  <span className="text-slate-500 text-xs font-normal self-end">
+                    {timeAgo(item.createdAt)}
+                  </span>
                 </Link>
               </Card>
             ))}

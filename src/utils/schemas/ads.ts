@@ -58,4 +58,6 @@ export type AdsSchemaType = z.infer<typeof adsSchema>;
 export type AdsDataType = Omit<AdsSchemaType, "lat" | "lng"> & {
   id: number;
   location: [number, number];
+  userId: number;
+  createdAt: Date;
 };
