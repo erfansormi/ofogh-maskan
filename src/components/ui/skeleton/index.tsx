@@ -22,7 +22,11 @@ const Skeleton = ({ rounded, className, width, height }: Props) => {
   return (
     <div
       style={{ width, height }}
-      className={cn(styles.skeleton_box, skeletonVariants({ rounded, className }))}
+      className={cn(
+        styles.skeleton_box,
+        "dark:bg-slate-800",
+        skeletonVariants({ rounded, className })
+      )}
     ></div>
   );
 };

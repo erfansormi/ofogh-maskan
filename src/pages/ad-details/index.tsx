@@ -27,7 +27,7 @@ const AdDetails = () => {
         isLoading={loading}
         loadingItemsCount={2}
         classNames={{
-          root: "!md:grid-cols-2 !grid-cols-1 max-w-4xl mx-auto gap-8 mt-10 place-items-center",
+          root: "md:!grid-cols-2 !grid-cols-1 max-w-4xl mx-auto gap-8 mt-10 place-items-center",
           skeleton: "h-72",
         }}
       >

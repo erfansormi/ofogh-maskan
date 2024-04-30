@@ -19,8 +19,10 @@ const buttonStyles = cva(
       variant: {
         default: "bg-blue-500 text-white hover:bg-blue-600",
         outline: "bg-white border text-slate-500 border-slate-400 hover:bg-slate-50",
-        success: "bg-emerald-100 text-emerald-700 border-emerald-500 border hover:bg-emerald-200",
-        error: "bg-red-100 text-red-700 border-red-500 border hover:bg-red-200",
+        success:
+          "bg-emerald-100 text-emerald-700 border-emerald-500 border hover:bg-emerald-200 dark:bg-emerald-700 dark:hover:bg-emerald-800 dark:text-emerald-100",
+        error:
+          "bg-red-100 text-red-700 border-red-500 border hover:bg-red-200 dark:bg-red-700 dark:hover:bg-red-800 dark:text-red-100",
       },
       width: {
         default: "",

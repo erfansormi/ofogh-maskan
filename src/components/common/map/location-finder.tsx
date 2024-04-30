@@ -15,7 +15,7 @@ const LocationFinder = ({ onChange, setPosition }: Omit<MarkerProps, "position">
   });
 
   return (
-    <span className="absolute bottom-4 left-4 bg-white size-10 rounded-full z-20 center border border-slate-300 cursor-pointer">
+    <span className="absolute bottom-4 left-4 bg-white text-slate-700 size-10 rounded-full z-20 center border border-slate-300 cursor-pointer">
       <LocateFixed />
     </span>
   );

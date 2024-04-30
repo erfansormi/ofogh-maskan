@@ -5,7 +5,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />
-      <main className="py-5 px-4 md:px-6 container">{children}</main>
+      <main className="py-5 px-4 md:px-6  bg-white dark:bg-slate-900">
+        <div className="container">{children}</div>
+      </main>
     </>
   );
 };

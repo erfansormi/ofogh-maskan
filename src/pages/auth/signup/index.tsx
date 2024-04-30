@@ -36,10 +36,10 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 bg-gradient-to-br from-slate-50 to-slate-400/90 center">
+    <div className="min-h-screen px-4 bg-gradient-to-br from-slate-50 to-slate-400/90 center dark:from-slate-950 dark:to-slate-700/90">
       <form
         onSubmit={handleSubmit(ouSubmit)}
-        className="max-w-2xl w-full bg-white px-8 py-8 rounded-lg shadow flex flex-col gap-6 center"
+        className="max-w-2xl w-full bg-white dark:bg-slate-900 px-8 py-8 rounded-lg shadow flex flex-col gap-6 center"
       >
         <div className="mb-4">
           <h1>

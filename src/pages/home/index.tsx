@@ -31,17 +31,20 @@ const HomePage = () => {
           >
             {data?.map((item) => (
               <Card key={item.id}>
-                <Link className="flex flex-col gap-4 text-inherit" to={`/ad-details/${item.id}`}>
-                  <div className="bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-600 center h-28">
+                <Link
+                  className="flex flex-col text-slate-500 dark:text-slate-400 gap-4 text-inherit"
+                  to={`/ad-details/${item.id}`}
+                >
+                  <div className="bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 center h-28">
                     <Image size={60} />
                   </div>
                   <div>
-                    <span className="mb-1 block font-medium">{item.province}</span>
-                    <p className="text-sm line-clamp-2 text-slate-500">{item.address}</p>
+                    <span className="mb-1 block font-medium text-slate-700 dark:text-slate-50">
+                      {item.province}
+                    </span>
+                    <p className="text-sm line-clamp-2">{item.address}</p>
                   </div>
-                  <span className="text-slate-500 text-xs font-normal self-end">
-                    {timeAgo(item.createdAt)}
-                  </span>
+                  <span className="text-xs font-normal self-end">{timeAgo(item.createdAt)}</span>
                 </Link>
               </Card>
             ))}

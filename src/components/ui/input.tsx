@@ -20,8 +20,8 @@ export const inputStyles = cva(
   {
     variants: {
       variant: {
-        default: "bg-white dark:bg-slate-900",
-        filled: "bg-slate-50 dark:bg-slate-900",
+        default: "bg-white dark:bg-slate-800",
+        filled: "bg-slate-50 dark:bg-slate-800",
       },
     },
     defaultVariants: {

@@ -31,6 +31,10 @@
   a {
     @apply text-cyan-500 font-medium;
   }
+
+  hr {
+    @apply border-slate-200 dark:border-slate-700;
+  }
 }
 
 @layer utilities {

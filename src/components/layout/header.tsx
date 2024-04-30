@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import Button from "../ui/button";
-import { LogIn, Plus } from "lucide-react";
+import { LogIn, Moon, Plus, Sun } from "lucide-react";
 import { useUserContext } from "../../context/user-context";
 import BrandTitle from "../common/brand-title";
+import { useState } from "react";
 
 const Header = () => {
   const { user } = useUserContext();
+  const storegeTheme = localStorage.getItem("theme");
+  const [theme, setTheme] = useState(storegeTheme);
 
   return (
-    <header className="h-14 flex items-center px-6 shadow backdrop-blur-[6px] bg-slate-100/50 dark:bg-slate-900 w-full z-20 top-0 inset-x-0 sticky">
+    <header className="h-14 flex items-center px-6 shadow backdrop-blur-[6px] bg-slate-100/50 dark:bg-slate-800/50 w-full z-20 top-0 inset-x-0 sticky">
       <nav className="flex size-full items-center justify-between container">
         <div className="">
           <h2 className="text-3xl">
@@ -17,8 +20,9 @@ const Header = () => {
             </Link>
           </h2>
         </div>
-        <div className="text-sm">
+        <div className="text-sm flex items-center gap-4">
           {!user ? (
+            // LOGIN AND SIGNUP
             <Button
               variant={"outline"}
               className="flex items-center font-medium py-0 pl-0 *:text-slate-500 cursor-default"
@@ -33,6 +37,7 @@ const Header = () => {
               </Link>
             </Button>
           ) : (
+            // CREATE AD
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
                 <span>سلام</span>
@@ -49,6 +54,24 @@ const Header = () => {
               </Link>
             </div>
           )}
+
+          {/* CHANGE THEME */}
+          <span
+            className="cursor-pointer"
+            onClick={() => {
+              if (!theme || theme === "light") {
+                document.querySelector("html")?.classList.add("dark");
+                setTheme("dark");
+                localStorage.setItem("theme", "dark");
+              } else {
+                document.querySelector("html")?.classList.remove("dark");
+                setTheme("light");
+                localStorage.setItem("theme", "light");
+              }
+            }}
+          >
+            {!theme || theme === "light" ? <Sun /> : <Moon />}
+          </span>
         </div>
       </nav>
     </header>
