@@ -6,9 +6,11 @@ export interface MarkerProps extends MapProps {
   setPosition: React.Dispatch<React.SetStateAction<[number, number]>>;
 }
 
-function LocationMarker({ onChange, setPosition, position }: MarkerProps) {
+function LocationMarker({ onChange, setPosition, position, staticMap }: MarkerProps) {
   const map = useMapEvents({
     click(e) {
+      if (staticMap) return;
+
       if ((e.originalEvent.target as any)?.nodeName !== "DIV") return;
 
       map.flyTo(e.latlng, map.getZoom() <= 15 ? 15 : map.getZoom());

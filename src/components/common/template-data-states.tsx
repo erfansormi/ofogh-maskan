@@ -1,10 +1,15 @@
 import { ReactNode } from "react";
 import Skeleton from "../ui/skeleton";
 import { ShieldAlert, TriangleAlert } from "lucide-react";
+import { cn } from "../../lib/utils";
 
 interface Props {
-  error?: string | null;
   isError?: boolean;
+  classNames?: {
+    root?: string;
+    skeleton?: string;
+  };
+  error?: string | null;
   isLoading?: boolean;
   children: ReactNode;
   isDataEmpty?: boolean;
@@ -15,11 +20,13 @@ const TemplateDataStates = (props: Props) => {
   const { loadingItemsCount = 10, isDataEmpty = false, isError = false, isLoading = false } = props;
 
   return (
-    <div className="grid-cols-5 grid gap-5 w-full">
+    <div className={cn("grid-cols-5 grid gap-5 w-full", props.classNames?.root)}>
       {
         // LOADING
         isLoading ? (
-          [...Array(loadingItemsCount)].map((_, i) => <Skeleton key={i} className="h-32 w-full" />)
+          [...Array(loadingItemsCount)].map((_, i) => (
+            <Skeleton key={i} className={cn("h-32 w-full", props.classNames?.skeleton)} />
+          ))
         ) : // ERROR
         isError || props.error ? (
           <div className="col-span-full center flex-col gap-4 text-red-500 text-lg font-medium">

@@ -29,7 +29,7 @@
   }
 
   a {
-    @apply text-cyan-500;
+    @apply text-cyan-500 font-medium;
   }
 }
 
@@ -45,4 +45,10 @@
   .border-main {
     @apply border border-slate-200 dark:border-slate-700 border-solid;
   }
+}
+
+.leaflet-pane,
+.leaflet-pane *,
+.leaflet-control-container {
+  z-index: 10 !important;
 }

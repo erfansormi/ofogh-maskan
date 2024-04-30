@@ -1,21 +1,17 @@
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../../lib/axios";
+import { Link } from "react-router-dom";
 import Input from "../../../components/ui/input";
 import Button from "../../../components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDataStates } from "../../../hooks/use-data-states";
 import { SignupDataType, signupSchema } from "../../../utils/schemas/auth";
-
-interface SignupResponse {
-  accessToken: string;
-}
+import BrandTitle from "../../../components/common/brand-title";
+import { AuthServiceAPI } from "../../../services/auth";
 
 const SignupPage = () => {
   const { loading, setLoading } = useDataStates();
-  const navigate = useNavigate();
 
   const { handleSubmit, formState, register } = useForm<SignupDataType>({
     resolver: zodResolver(signupSchema),
@@ -23,14 +19,14 @@ const SignupPage = () => {
 
   const ouSubmit = (data: SignupDataType) => {
     setLoading(true);
+    const newObj = { ...data, confirmPassword: undefined };
 
     setTimeout(() => {
-      axiosInstance
-        .post<SignupResponse>("/register", { ...data, confirmPassword: undefined })
+      AuthServiceAPI.signup(newObj)
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
           toast.success("ثبت نام با موفقیت انجام شد");
-          navigate("/");
+          window.location.href = "/";
         })
         .catch((err: AxiosError<string>) => {
           toast.error(err.response?.data || err.message);
@@ -46,7 +42,9 @@ const SignupPage = () => {
         className="max-w-2xl w-full bg-white px-8 py-8 rounded-lg shadow flex flex-col gap-6 center"
       >
         <div className="mb-4">
-          <h1>ثبت نام در مسکینو</h1>
+          <h1>
+            ثبت نام در <BrandTitle />
+          </h1>
         </div>
         <div className="flex flex-col gap-3 w-full">
           <div className="flex items-center w-full gap-3">

@@ -15,7 +15,7 @@ type InputProps = React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
-const inputStyles = cva(
+export const inputStyles = cva(
   "px-3 py-2 rounded-lg border-main outline-0 focus:ring-1 focus:ring-blue-500",
   {
     variants: {

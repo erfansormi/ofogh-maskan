@@ -4,18 +4,14 @@ import { useForm } from "react-hook-form";
 import { LoginDataType, loginSchema } from "../../../utils/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDataStates } from "../../../hooks/use-data-states";
-import axiosInstance from "../../../lib/axios";
 import { AxiosError } from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-
-interface LoginResponse {
-  accessToken: string;
-}
+import BrandTitle from "../../../components/common/brand-title";
+import { AuthServiceAPI } from "../../../services/auth";
 
 const LoginPage = () => {
   const { loading, setLoading } = useDataStates();
-  const navigate = useNavigate();
 
   const { handleSubmit, formState, register } = useForm<LoginDataType>({
     resolver: zodResolver(loginSchema),
@@ -25,12 +21,11 @@ const LoginPage = () => {
     setLoading(true);
 
     setTimeout(() => {
-      axiosInstance
-        .post<LoginResponse>("/login", data)
+      AuthServiceAPI.login(data)
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
           toast.success("ورود با موفقیت انجام شد");
-          navigate("/");
+          window.location.href = "/";
         })
         .catch((err: AxiosError<string>) => {
           toast.error(err.response?.data || err.message);
@@ -46,7 +41,9 @@ const LoginPage = () => {
         className="max-w-2xl w-full bg-white px-8 py-8 rounded-lg shadow flex flex-col gap-6 center"
       >
         <div className="mb-4">
-          <h1>ورود به مسکینو</h1>
+          <h1>
+            ورود به <BrandTitle />
+          </h1>
         </div>
         <div className="flex flex-col gap-3 w-full">
           <Input
@@ -72,7 +69,7 @@ const LoginPage = () => {
             width={"lg"}
             type="submit"
             loading={loading}
-            disabled={formState.submitCount > 0 && !formState.isSubmitSuccessful}
+            disabled={formState.submitCount > 0 && Object.values(formState.errors).length > 0}
           >
             ورود
           </Button>

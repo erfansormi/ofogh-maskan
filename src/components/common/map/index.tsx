@@ -5,11 +5,12 @@ import { useState } from "react";
 import { MapContainer, MapContainerProps, TileLayer } from "react-leaflet";
 
 export interface MapProps {
+  staticMap?: boolean;
   position?: [number, number];
   onChange?: (lat: number, lng: number) => void;
 }
 
-const Map = ({ onChange, ...props }: MapContainerProps & MapProps) => {
+const Map = ({ staticMap = false, onChange, ...props }: MapContainerProps & MapProps) => {
   const [position, setPosition] = useState<[number, number]>(
     props.position || [35.68909089912437, 51.38797044754029]
   );
@@ -24,8 +25,13 @@ const Map = ({ onChange, ...props }: MapContainerProps & MapProps) => {
       {...props}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <LocationMarker onChange={onChange} position={position} setPosition={setPosition} />
-      <LocationFinder setPosition={setPosition} onChange={onChange} />
+      <LocationMarker
+        staticMap={staticMap}
+        onChange={onChange}
+        position={position}
+        setPosition={setPosition}
+      />
+      {staticMap ? null : <LocationFinder setPosition={setPosition} onChange={onChange} />}
     </MapContainer>
   );
 };
