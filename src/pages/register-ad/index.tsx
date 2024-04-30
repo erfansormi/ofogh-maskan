@@ -65,7 +65,7 @@ const RegisterAdPage = (props: CreateProps | EditProps) => {
           })
             .then(() => {
               toast.success("آگهی با موفقیت ویرایش شد");
-              props.setOpen(false);
+              window.location.reload();
             })
             .catch((err: AxiosError<string>) => {
               toast.error(err.response?.data || err.message);

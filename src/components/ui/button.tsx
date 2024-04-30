@@ -18,7 +18,8 @@ const buttonStyles = cva(
     variants: {
       variant: {
         default: "bg-blue-500 text-white hover:bg-blue-600",
-        outline: "bg-white border text-slate-500 border-slate-400 hover:bg-slate-50",
+        outline:
+          "bg-white border text-slate-500 border-slate-400 hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900/70 dark:text-slate-300",
         success:
           "bg-emerald-100 text-emerald-700 border-emerald-500 border hover:bg-emerald-200 dark:bg-emerald-700 dark:hover:bg-emerald-800 dark:text-emerald-100",
         error:
