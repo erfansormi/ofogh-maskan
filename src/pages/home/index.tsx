@@ -22,7 +22,7 @@ const HomePage = () => {
           </h1>
         </div>
 
-        {/* ADS */}
+        {/* AD CARDS */}
         <div className="grow flex-col mt-10 w-full">
           <TemplateDataStates
             error={error}
@@ -42,7 +42,7 @@ const HomePage = () => {
                     <span className="mb-1 block font-medium text-slate-700 dark:text-slate-50">
                       {item.province}
                     </span>
-                    <p className="text-sm line-clamp-2">{item.address}</p>
+                    <p className="text-sm h-10 line-clamp-2">{item.address}</p>
                   </div>
                   <span className="text-xs font-normal self-end">{timeAgo(item.createdAt)}</span>
                 </Link>
